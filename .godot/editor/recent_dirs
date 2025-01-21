@@ -1,0 +1,11 @@
+res://player
+res://player/player_death_effect
+res://ui
+res://ui/health_bar
+res://scripts
+res://scripts/state_machine
+res://enemies/dino
+res://enemies
+res://levels/test_levels
+res://levels
+res://background

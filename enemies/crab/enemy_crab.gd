@@ -23,6 +23,9 @@ var current_point_position : int
 var can_walk : bool
 
 func _ready():
+	$Hurtbox.set_deferred("monitoring", true)
+	$Hurtbox.set_deferred("monitorable", true)
+	
 	if patrol_points != null:
 		number_of_points = patrol_points.get_children().size()
 		for point in patrol_points.get_children():
@@ -99,7 +102,7 @@ func _on_timer_timeout():
 
 
 func _on_hurtbox_area_entered(area : Area2D):
-	print("Hurtbox area entered")
+	print("Enemy Hurtbox detected:", area.name)
 	if area.get_parent().has_method("get_damage_amount"):
 		var node = area.get_parent() as Node
 		health_amount -= node.damage_amount

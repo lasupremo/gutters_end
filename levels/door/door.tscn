@@ -1,18 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgmw7xn5sy57o"]
+[gd_scene load_steps=6 format=3 uid="uid://cgmw7xn5sy57o"]
 
 [ext_resource type="Texture2D" uid="uid://f4wp1lux28pw" path="res://levels/door/bigpipe.png" id="1_ge4u8"]
 [ext_resource type="Script" path="res://levels/door/door.gd" id="1_qjcqt"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lfevb"]
+size = Vector2(191.75, 224)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_naf7v"]
 size = Vector2(37, 219)
 
-[node name="Door" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3poxk"]
+size = Vector2(258, 224)
+
+[node name="Door" type="StaticBody2D"]
 script = ExtResource("1_qjcqt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 1
 position = Vector2(96, -112)
 texture = ExtResource("1_ge4u8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(96.125, -112)
+shape = SubResource("RectangleShape2D_lfevb")
 
 [node name="ExitArea2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -23,4 +32,15 @@ position = Vector2(173.5, -109.5)
 shape = SubResource("RectangleShape2D_naf7v")
 debug_color = Color(5.05373e-07, 0.650509, 0.0878869, 0.42)
 
+[node name="ActivateDoorArea2D" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActivateDoorArea2D"]
+position = Vector2(-129, -112)
+shape = SubResource("RectangleShape2D_3poxk")
+debug_color = Color(0.730705, 0.233905, 1, 0.42)
+
 [connection signal="body_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_body_entered"]
+[connection signal="body_entered" from="ActivateDoorArea2D" to="." method="_on_activate_door_area_2d_body_entered"]
+[connection signal="body_exited" from="ActivateDoorArea2D" to="." method="_on_activate_door_area_2d_body_exited"]

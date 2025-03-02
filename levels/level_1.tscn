@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://db6s7gf2okywt"]
+[gd_scene load_steps=10 format=3 uid="uid://db6s7gf2okywt"]
 
 [ext_resource type="PackedScene" uid="uid://7tckkpbu087a" path="res://levels/base_level.tscn" id="1_ncwg1"]
 [ext_resource type="PackedScene" uid="uid://dq103ft5bj3ce" path="res://background/parallax_background.tscn" id="2_2b4ga"]
+[ext_resource type="Script" path="res://levels/level_1.gd" id="2_h82f8"]
 [ext_resource type="PackedScene" uid="uid://btsa7ekxun3du" path="res://enemies/crab/enemy_crab.tscn" id="3_ht5cb"]
 [ext_resource type="PackedScene" uid="uid://ix2cn40im88j" path="res://pickups/health_pickup/health_pickup.tscn" id="3_ocx18"]
 [ext_resource type="PackedScene" uid="uid://rkt2ja45nt1o" path="res://ui/game_screen.tscn" id="4_cxyxs"]
 [ext_resource type="PackedScene" uid="uid://bnhpkioil3mx4" path="res://collectibles/blue_coin/blue_coin.tscn" id="5_h8g44"]
+[ext_resource type="PackedScene" uid="uid://dmu2qjrf6lv11" path="res://levels/keys/key.tscn" id="7_7pra7"]
 [ext_resource type="PackedScene" uid="uid://cgmw7xn5sy57o" path="res://levels/door/door.tscn" id="7_avh2y"]
 
-[node name="Level1" instance=ExtResource("1_ncwg1")]
+[node name="Level1" node_paths=PackedStringArray("level_start_pos") instance=ExtResource("1_ncwg1")]
+script = ExtResource("2_h82f8")
+level_start_pos = NodePath("PlayerStart")
 
 [node name="ParallaxBackground" parent="." index="0" instance=ExtResource("2_2b4ga")]
 offset = Vector2(0, -264)
@@ -68,9 +72,16 @@ position = Vector2(1230, -153)
 [node name="BlueCoin4" parent="Collectibles" index="3" instance=ExtResource("5_h8g44")]
 position = Vector2(1445, -314)
 
-[node name="Door" parent="." index="5" instance=ExtResource("7_avh2y")]
+[node name="Door1" type="Node" parent="." index="5"]
+
+[node name="Door" parent="Door1" index="0" instance=ExtResource("7_avh2y")]
 position = Vector2(2752, -307)
 next_scene = "Level2"
+key_id = "1"
+
+[node name="Key" parent="Door1" index="1" instance=ExtResource("7_7pra7")]
+position = Vector2(28, -532)
+key_id = "1"
 
 [node name="Player" parent="." index="6"]
 position = Vector2(40, -32)
@@ -82,3 +93,6 @@ limit_bottom = 240
 editor_draw_limits = true
 
 [node name="GameScreen" parent="." index="8" instance=ExtResource("4_cxyxs")]
+
+[node name="PlayerStart" type="Node2D" parent="." index="9"]
+position = Vector2(33, -62)

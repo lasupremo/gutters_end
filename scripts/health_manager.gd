@@ -10,6 +10,12 @@ func _ready():
 	current_health = max_health
 
 
+func reset_health(): 
+	# Added: Reset health to max when called
+	current_health = max_health
+	on_health_changed.emit(current_health) # Notify UI or other systems
+
+
 func decrease_health(health_amount : int):
 	current_health -= health_amount
 	

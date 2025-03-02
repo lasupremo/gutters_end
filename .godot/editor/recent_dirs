@@ -1,13 +1,16 @@
-res://enemies/crab
+res://levels
+res://player
+res://enemies
+res://player/player_states
+res://ui/screen_transition
+res://levels/keys
 res://scripts
+res://enemies/crab
 res://levels/door
 res://ui/theme
-res://levels
 res://player/player_death_effect
 res://collectibles
 res://enemies/rat
-res://enemies
-res://player
 res://player/assets
 res://ui
 res://collectibles/blue_carat
@@ -17,5 +20,3 @@ res://collectibles/blue_coin
 res://ui/health_bar
 res://scripts/state_machine
 res://enemies/dino
-res://levels/test_levels
-res://background

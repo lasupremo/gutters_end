@@ -25,6 +25,7 @@ var can_walk : bool
 func _ready():
 	$Hurtbox.set_deferred("monitoring", true)
 	$Hurtbox.set_deferred("monitorable", true)
+	print("Enemy Hurtbox Active?", $Hurtbox.monitoring, "| Monitorable?", $Hurtbox.monitorable)
 	
 	if patrol_points != null:
 		number_of_points = patrol_points.get_children().size()

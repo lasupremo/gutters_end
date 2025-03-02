@@ -10,11 +10,11 @@ var is_dead = false  # Added: Prevents movement after death
 
 
 func _ready():
-	# Ensure the Hurtbox is enabled at runtime
-	$Hurtbox.set_deferred("monitoring", true)
-	$Hurtbox.set_deferred("monitorable", true)
+	# Temporarily remove the player's collision from the enemy's mask
+	set_collision_layer_value(2, false)  
+	set_collision_mask_value(3, false)
 
-	print("Player Ready: Hurtbox Monitoring?", $Hurtbox.monitoring, "| Monitorable?", $Hurtbox.monitorable)
+	print("Testing: Player no longer blocks the enemy, but still collides with ground.")
 
 
 func player_death():

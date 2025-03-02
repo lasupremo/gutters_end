@@ -47,16 +47,14 @@ func on_physics_process(delta: float):
 func enter():
 	animated_sprite_2d.play("idle")
 
-	# Ensure the player's collision and hurtbox are enabled
-	var collision_shape = character_body_2d.get_node("CollisionShape2D")
-	collision_shape.disabled = false
-
+	# Ensure the player's Hurtbox is enabled
 	var hurtbox = character_body_2d.get_node("Hurtbox")
 	hurtbox.monitoring = true
 	hurtbox.monitorable = true
+	hurtbox.set_deferred("monitoring", true)
+	hurtbox.set_deferred("monitorable", true)
 
-	# Force re-add the CollisionShape2D to the physics engine
-	collision_shape.reparent(character_body_2d)
+	print("Idle State: Hurtbox Active?", hurtbox.monitoring, "| Monitorable?", hurtbox.monitorable)
 
 
 func exit():

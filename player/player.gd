@@ -10,11 +10,15 @@ var is_dead = false  # Added: Prevents movement after death
 
 
 func _ready():
-	# Temporarily remove the player's collision from the enemy's mask
-	set_collision_layer_value(2, false)  
-	set_collision_mask_value(3, false)
+	# Allow the player to collide with collectibles but NOT block enemies
+	set_collision_layer_value(2, true)   # Enable Player Layer (for collectibles)
+	set_collision_mask_value(3, false)   # Disable enemy-player solid collision
+	
+	# Allow only the player's HURTBOX (Area2D) to interact with enemies
+	$Hurtbox.set_collision_layer_value(4, true)  # Hurtbox on Layer 4
+	$Hurtbox.set_collision_mask_value(3, true)   # Detect Enemies
 
-	print("Testing: Player no longer blocks the enemy, but still collides with ground.")
+	print("Player can collect items, and enemies can pass through!")
 
 
 func player_death():
@@ -36,7 +40,7 @@ func player_death():
 
 	# Tell the camera to stop following the player
 	if $"../PlayerCamera2D":
-		$"../PlayerCamera2D".player = null  # <-- Added this
+		$"../PlayerCamera2D".player = null  
 
 	# Create the death effect instance
 	var player_death_effect_instance = player_death_effect.instantiate() as Node2D
@@ -46,11 +50,12 @@ func player_death():
 	# Wait for the death animation to finish
 	await get_tree().create_timer(1.5).timeout  
 
-	# Now wait 5 seconds before resetting the level
+	# ✅ Now wait 5 seconds before resetting the level
 	await get_tree().create_timer(5.0).timeout
 	
-	SceneManager.transition_to_scene(get_tree().current_scene.scene_file_path)
-	queue_free()  # Free the player after the reset
+	# ✅ Reset level and health on death
+	SceneManager.transition_to_scene(get_tree().current_scene.scene_file_path, true)
+	queue_free()
 
 
 func _on_hurtbox_body_entered(body : Node2D):

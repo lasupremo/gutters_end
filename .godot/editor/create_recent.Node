@@ -1,8 +1,8 @@
+Node
 CollisionShape2D
 Marker2D
 Node2D
 Area2D
-Node
 Label
 MarginContainer
 TextureRect

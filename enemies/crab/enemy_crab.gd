@@ -23,10 +23,19 @@ var current_point_position : int
 var can_walk : bool
 
 func _ready():
+	# Ensure Hurtbox is active
 	$Hurtbox.set_deferred("monitoring", true)
 	$Hurtbox.set_deferred("monitorable", true)
 	print("Enemy Hurtbox Active?", $Hurtbox.monitoring, "| Monitorable?", $Hurtbox.monitorable)
-	
+
+	# Modify collision settings so enemy passes through player
+	set_collision_layer_value(3, true)  # Keep enemy in Layer 3
+	set_collision_mask_value(2, false)  # Disable collision with Player's solid body
+	set_collision_mask_value(4, true)   # Allow enemy to detect Player's Hurtbox
+
+	print("Enemy now passes through Player but still triggers Hurtbox!")
+
+	# Setup patrol points if available
 	if patrol_points != null:
 		number_of_points = patrol_points.get_children().size()
 		for point in patrol_points.get_children():
@@ -34,9 +43,8 @@ func _ready():
 		current_point = point_positions[current_point_position]
 	else:
 		print("No patrol points")
-	
+
 	timer.wait_time = wait_time
-	
 	current_state = State.Idle
 
 

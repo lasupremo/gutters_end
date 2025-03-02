@@ -29,6 +29,10 @@ func on_physics_process(delta : float):
 	# jump state
 	if GameInputEvents.jump_input() and coyote_jump:
 		transition.emit("Jump")
+	
+	# wall cling state
+	if GameInputEvents.wall_cling_input() and character_body_2d.is_on_wall():
+		transition.emit("ShootWallCling")
 
 
 func enter():

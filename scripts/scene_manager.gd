@@ -2,18 +2,25 @@ extends Node
 
 var scene_transition_screen = preload("res://ui/screen_transition/scene_transition_screen.tscn")
 
-var scenes : Dictionary = { "Level1": "res://levels/level_1.tscn",
-							"Level2": "res://levels/level_2.tscn",
-							"Level3": "res://levels/level_3.tscn" }
+var scenes: Dictionary = {
+	"TutorialLevel": "res://levels/tutorial_level.tscn",
+	"Level1": "res://levels/level_1.tscn",
+	"Level2": "res://levels/level_2.tscn",
+	"Level3": "res://levels/level_3.tscn"
+}
 
-var saved_health: int = 3
+var saved_health: int = 3  # Stores player's health when transitioning normally
 
 func transition_to_scene(level_or_path: String, is_death_reset: bool = false):
 	var scene_path: String = scenes.get(level_or_path, level_or_path)
 	if scene_path != null:
-		# ✅ Save player's health only if NOT dying
-		if not is_death_reset:
-			saved_health = HealthManager.current_health  # Store current health when changing levels
+		# ✅ If the player died, reset health before restarting the level
+		if is_death_reset:
+			HealthManager.reset_health()
+			print("Player died - Health reset to max")
+		else:
+			# ✅ Save player's health if NOT dying
+			saved_health = HealthManager.current_health
 			print("Saving health:", saved_health)
 
 		# Scene transition effect
@@ -23,11 +30,15 @@ func transition_to_scene(level_or_path: String, is_death_reset: bool = false):
 		get_tree().change_scene_to_file(scene_path)
 		scene_transition_screen_instance.queue_free()
 
-		# ✅ Restore player's saved health if transitioning levels
+		# ✅ Restore saved health only if NOT a death reset
 		if not is_death_reset:
-			HealthManager.load_health(saved_health)
+			HealthManager.current_health = saved_health
 			print("Restored health:", HealthManager.current_health)
+
+		# ✅ Ensure UI updates after transition
+		var game_screen = get_tree().get_root().find_child("GameScreen", true, false)  
+		if game_screen:
+			game_screen.update_health_display(HealthManager.current_health)
+			print("Forced UI update - Health:", HealthManager.current_health)
 		else:
-			# ✅ If resetting due to death, reset health
-			HealthManager.reset_health()
-			print("Reset health due to player death")
+			print("Warning: GameScreen not found, UI may not update.")

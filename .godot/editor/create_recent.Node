@@ -1,14 +1,14 @@
 Node
+Control
+Label
 CollisionShape2D
+StaticBody2D
 Marker2D
 Node2D
 Area2D
-Label
 MarginContainer
 TextureRect
 CanvasLayer
 Sprite2D
-StaticBody2D
 PanelContainer
 VBoxContainer
-TileMap

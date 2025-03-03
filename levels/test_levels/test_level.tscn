@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://5gjf7yhjxtov"]
+[gd_scene load_steps=7 format=3 uid="uid://5gjf7yhjxtov"]
 
 [ext_resource type="PackedScene" uid="uid://7tckkpbu087a" path="res://levels/base_level.tscn" id="1_0o5k6"]
 [ext_resource type="PackedScene" uid="uid://dq103ft5bj3ce" path="res://background/parallax_background.tscn" id="2_dqrmo"]
 [ext_resource type="PackedScene" uid="uid://cf58lcrj4txsu" path="res://enemies/dino/enemy_dino.tscn" id="3_uad5m"]
 [ext_resource type="PackedScene" uid="uid://btsa7ekxun3du" path="res://enemies/crab/enemy_crab.tscn" id="4_oytgj"]
 [ext_resource type="PackedScene" uid="uid://rkt2ja45nt1o" path="res://ui/game_screen.tscn" id="5_sral7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iltd1"]
+size = Vector2(20, 185)
 
 [node name="TestLevel" instance=ExtResource("1_0o5k6")]
 
@@ -40,3 +43,11 @@ limit_top = -1208
 limit_right = 1463
 limit_bottom = 292
 editor_draw_limits = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="6"]
+collision_layer = 128
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+position = Vector2(-12, -92)
+shape = SubResource("RectangleShape2D_iltd1")

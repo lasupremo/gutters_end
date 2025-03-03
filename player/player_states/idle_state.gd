@@ -11,6 +11,8 @@ func on_process(delta : float):
 
 
 func on_physics_process(delta: float):
+	#print("Current State: Idle")
+
 	# Even if idle, call move_and_slide() to register collisions
 	character_body_2d.velocity.x = move_toward(character_body_2d.velocity.x, 0, slow_down_speed)
 	character_body_2d.move_and_slide()  # <-- Ensure this runs always
@@ -54,7 +56,7 @@ func enter():
 	hurtbox.set_deferred("monitoring", true)
 	hurtbox.set_deferred("monitorable", true)
 
-	print("Idle State: Hurtbox Active?", hurtbox.monitoring, "| Monitorable?", hurtbox.monitorable)
+	#print("Idle State: Hurtbox Active?", hurtbox.monitoring, "| Monitorable?", hurtbox.monitorable)
 
 
 func exit():

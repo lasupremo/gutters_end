@@ -12,6 +12,8 @@ func on_process(delta : float):
 
 
 func on_physics_process(delta : float):
+	#print("Current State: Run")  
+
 	var direction : float = GameInputEvents.movement_input()
 
 	# Only move if on the ground

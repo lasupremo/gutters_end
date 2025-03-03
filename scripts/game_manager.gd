@@ -15,7 +15,7 @@ func start_game():
 		continue_game()
 		return
 	
-	SceneManager.transition_to_scene("Level1")
+	SceneManager.transition_to_scene("TutorialLevel")
 
 func exit_game():
 	get_tree().quit()

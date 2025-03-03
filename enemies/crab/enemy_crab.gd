@@ -26,14 +26,14 @@ func _ready():
 	# Ensure Hurtbox is active
 	$Hurtbox.set_deferred("monitoring", true)
 	$Hurtbox.set_deferred("monitorable", true)
-	print("Enemy Hurtbox Active?", $Hurtbox.monitoring, "| Monitorable?", $Hurtbox.monitorable)
+	#print("Enemy Hurtbox Active?", $Hurtbox.monitoring, "| Monitorable?", $Hurtbox.monitorable)
 
 	# Modify collision settings so enemy passes through player
 	set_collision_layer_value(3, true)  # Keep enemy in Layer 3
 	set_collision_mask_value(2, false)  # Disable collision with Player's solid body
 	set_collision_mask_value(4, true)   # Allow enemy to detect Player's Hurtbox
 
-	print("Enemy now passes through Player but still triggers Hurtbox!")
+	#print("Enemy now passes through Player but still triggers Hurtbox!")
 
 	# Setup patrol points if available
 	if patrol_points != null:
@@ -111,14 +111,36 @@ func _on_timer_timeout():
 
 
 func _on_hurtbox_area_entered(area : Area2D):
-	print("Enemy Hurtbox detected:", area.name)
+	print("Before Death - Collision Enabled?", $CollisionShape2D.disabled)
+	print("Before Death - Hurtbox Enabled?", $Hurtbox/CollisionShape2D.disabled)
+
 	if area.get_parent().has_method("get_damage_amount"):
 		var node = area.get_parent() as Node
 		health_amount -= node.damage_amount
 		print("Health amount: ", health_amount)
-		
-		if health_amount <= 0:
-			var enemy_death_effect_instance = enemy_death_effect.instantiate() as Node2D
-			enemy_death_effect_instance.global_position = global_position
-			get_parent().add_child(enemy_death_effect_instance)
-			queue_free()
+
+	if health_amount <= 0:
+		die()  # ✅ Call die() instead of directly removing the enemy
+
+func die():
+	print("Enemy Died - Disabling Collision!")
+
+	# ✅ Fully disable ALL collision shapes
+	if $CollisionShape2D:
+		$CollisionShape2D.set_deferred("disabled", true)
+	
+	if $Hurtbox/CollisionShape2D:
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
+
+	# ✅ Hide the enemy instantly
+	$AnimatedSprite2D.visible = false  
+
+	# ✅ Play death effect
+	var enemy_death_effect_instance = enemy_death_effect.instantiate() as Node2D
+	enemy_death_effect_instance.global_position = global_position
+	get_parent().add_child(enemy_death_effect_instance)
+
+	# ✅ Remove enemy after ensuring collision is disabled
+	await get_tree().create_timer(0.1).timeout  
+	queue_free()
+

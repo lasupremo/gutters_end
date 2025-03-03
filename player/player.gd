@@ -18,7 +18,7 @@ func _ready():
 	$Hurtbox.set_collision_layer_value(4, true)  # Hurtbox on Layer 4
 	$Hurtbox.set_collision_mask_value(3, true)   # Detect Enemies
 
-	print("Player can collect items, and enemies can pass through!")
+	#print("Player can collect items, and enemies can pass through!")
 
 
 func player_death():
@@ -59,7 +59,7 @@ func player_death():
 
 
 func _on_hurtbox_body_entered(body : Node2D):
-	print("Hurtbox triggered by:", body.name)
+	#print("Hurtbox triggered by:", body.name)
 	
 	if is_dead:  # Added: Ignore damage if already dead
 		return

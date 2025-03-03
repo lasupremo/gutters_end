@@ -88,6 +88,7 @@ wall_cling={
 2d_physics/layer_5="COLLECTIBLES"
 2d_physics/layer_6="DOORS"
 2d_physics/layer_7="KEYS"
+2d_physics/layer_8="BARRIER"
 
 [rendering]
 

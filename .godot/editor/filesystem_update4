@@ -11,3 +11,17 @@ res://enemies/enemy_death_effect.tscn
 res://enemies/crab/enemy_crab.tscn
 res://levels/base_level.tscn
 res://player/player_states/jump_state.gd
+res://player/player.gd
+res://enemies/crab/enemy_crab.gd
+res://player/player_states/idle_state.gd
+res://player/player_states/run_state.gd
+res://ui/game_screen.tscn
+res://scripts/scene_manager.gd
+res://ui/game_screen.gd
+res://ui/health_bar/health_bar.tscn
+res://ui/health_bar/health_bar.gd
+res://scripts/health_manager.gd
+res://player/player_states/shoot_wall_cling_state.gd
+res://levels/tutorial_level.tscn
+res://ui/screen_transition/scene_transition_screen.tscn
+res://scripts/game_manager.gd

@@ -1,6 +1,6 @@
 D:/Liam/School/College/3rd year/term 2/GAMEDES/Gutter's End
-D:/Liam/School/College/3rd year/term 2/GAMEDES
 res://levels
+D:/Liam/School/College/3rd year/term 2/GAMEDES
 res://player
 res://enemies
 res://player/player_states
@@ -20,5 +20,3 @@ res://collectibles/blue_gem
 res://pickups/health_pickup
 res://collectibles/blue_coin
 res://ui/health_bar
-res://scripts/state_machine
-res://enemies/dino

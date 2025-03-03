@@ -508,14 +508,14 @@ height = 52.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
+collision_mask = 129
 script = ExtResource("1_p3awe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_jjda8")
 sprite_frames = SubResource("SpriteFrames_6b5k3")
-animation = &"shoot_wall_cling"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7, -26)
@@ -525,7 +525,6 @@ shape = SubResource("CapsuleShape2D_f0335")
 position = Vector2(22, -38)
 
 [node name="Hurtbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 4
 

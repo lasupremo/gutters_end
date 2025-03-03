@@ -7,7 +7,7 @@ extends NodeState
 @export var jump_height : float = -300
 @export var jump_horizontal_speed : int = 500
 @export var max_jump_horizontal_speed : int = 300
-@export var max_jump_count : int = 1
+@export var max_jump_count : int = 2
 @export var jump_gravity : int = 800
 
 var current_jump_count : int

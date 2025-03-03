@@ -557,7 +557,6 @@ animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 script = ExtResource("15_deriq")
 character_body_2d = NodePath("../..")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
-max_jump_count = 2
 
 [node name="ShootStand" type="Node" parent="StateMachine" node_paths=PackedStringArray("character_body_2d", "animated_sprite_2d", "muzzle")]
 script = ExtResource("16_p048u")
